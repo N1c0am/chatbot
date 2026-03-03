@@ -1,4 +1,4 @@
-# ia-s
+# chatbot
 
 To install dependencies:
 
