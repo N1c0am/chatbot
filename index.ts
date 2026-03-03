@@ -3,7 +3,6 @@ import {groqService} from './services/groq';
 import type { AIService, ChatMessage } from './types';
 import { geminiService } from './services/gemini';
 import { openRouterService } from './services/openrouter';
-//import { verifyToken, hasRole } from './src/middleware/auth';
 
 const services: AIService[]= [
     groqService,

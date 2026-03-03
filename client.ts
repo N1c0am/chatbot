@@ -3,7 +3,6 @@ import * as readline from 'node:readline';
 
 const SERVER_URL = process.env.SERVER_URL ?? 'http://localhost:3000';
 
-// ── Terminal colors ───
 const c = {
     reset:   '\x1b[0m',
     bold:    '\x1b[1m',
@@ -16,22 +15,21 @@ const c = {
 
 const conversationHistory: ChatMessage[] = [];
 
-// ── Helpers ───────────
 function printBanner() {
     console.clear();
     console.log(`${c.blue}${c.bold}`);
     console.log('  ║*****          BotTolomeo Chat Terminal            *****║');
     console.log(`${c.reset}${c.gray}  Conectado a: ${SERVER_URL}`);
-    console.log(`  ${c.green}${c.bold} Escribe  "log out" para terminar la sesión`);
-    console.log(`  ${c.green}${c.bold} Escribe  "clean" para borrar el historial`);
-    console.log(`  ${c.green}${c.bold} Escribe  "history" para ver la conversación.\n${c.reset}`);
+    console.log(`  ${c.green}${c.bold} Escribe "log out" para terminar la sesión`);
+    console.log(`  ${c.green}${c.bold} Escribe "clean" para borrar el historial`);
+    console.log(`  ${c.green}${c.bold} Escribe "history" para ver la conversación.\n${c.reset}`);
 }
 
 function printMessage(role: 'user' | 'assistant', content: string) {
     if (role === 'user') {
-        console.log(`\n${c.green}${c.bold}  Tú:${c.reset} ${content}`);
+        console.log(`\n${c.green}${c.bold} Tú:${c.reset} ${content}`);
     } else {
-        console.log(`\n${c.blue}${c.bold}  BotTolomeo:${c.reset}`);
+        console.log(`\n${c.blue}${c.bold} BotTolomeo:${c.reset}`);
     }
 }
 
@@ -72,7 +70,7 @@ async function sendMessage(userInput: string): Promise<void> {
         }
 
         if (!res.body) {
-            console.error(`\n${c.red}  No se recibió stream del servidor${c.reset}\n`);
+            console.error(`\n${c.red} No se recibió stream del servidor${c.reset}\n`);
             return;
         }
 
@@ -101,11 +99,10 @@ async function sendMessage(userInput: string): Promise<void> {
     } catch (err: any) {
         console.error(`\n${c.red}  Error de conexión: ${err.message}${c.reset}`);
         console.error(`${c.gray}  ¿Está corriendo el servidor en ${SERVER_URL}?${c.reset}\n`);
-        conversationHistory.pop(); // Revertir mensaje del usuario si falló
+        conversationHistory.pop();
     }
 }
 
-// ── Main loop ────────
 async function main() {
     printBanner();
 
